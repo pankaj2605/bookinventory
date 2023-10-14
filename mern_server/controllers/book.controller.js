@@ -1,5 +1,6 @@
 import Book from "../models/book.model.js";
 import { errorhandler } from "../utils/error.js";
+import mongoose from 'mongoose';
 
 export const test = (req,res)=>{
 
@@ -8,36 +9,49 @@ export const test = (req,res)=>{
     };
 
 
-export const uploadBook= async (req,res)=>{
+export const uploadBook= async (req,res,next)=>{
     try{
         const book = await Book.create(req.body);
         return res.status(201).json(book);
     }catch(error){
-        console.log(error);
+        next(error);
     }
     
 };
 
 
 
-export const getAllBook= async (req,res)=>{
+export const getAllBook= async (req,res,next)=>{
     try{
 
-        const books_Data= await Book.find({ });
+        let category=req.query.category;
+        if(category === undefined || category === 'all' ){
+            category={$in:['Mystery','Fiction','Triller']};
+        }
+        
+        const books_Data =await Book.find({
+            category,
+        })
     
-        if(!books_Data){
-            return 
+        if(books_Data.length === 0){
+            return next(errorhandler(404,'Books not listed for sale!'));
         }
         res.status(200).json(books_Data);
     }
     catch(error){
-        console.log(error)
+        next(error)
     }
         
 };
 
 export const updateBook= async (req,res,next)=>{
     try{
+
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return next(errorhandler(400,'Invalid object id!'));
+        }
+
+
         const book_Data= await Book.findById(req.params.id);
 
         if(!book_Data){
@@ -48,7 +62,31 @@ export const updateBook= async (req,res,next)=>{
         res.status(200).json(updatedBook);
     }
     catch(error){
-        console.log(error);
+        next(error);
+    }
+    
+};
+
+
+export const deleteBook= async (req,res,next)=>{
+    try{
+
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return next(errorhandler(400,'Invalid object id!'));
+        }
+
+
+        const book_Data= await Book.findById(req.params.id);
+
+        if(!book_Data){
+            return next(errorhandler(404,'Book not found!'))
+        }
+
+        await Book.findByIdAndDelete(req.params.id,req.body,{new:true});
+        res.status(200).json("Book is deleted");
+    }
+    catch(error){
+        next(error);
     }
     
 };
