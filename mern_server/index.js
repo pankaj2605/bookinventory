@@ -40,7 +40,7 @@ app.listen(port, () => {
 
 
 
-app.use("/book",bookRouter);
+app.use("/api/book",bookRouter);
 
 
 

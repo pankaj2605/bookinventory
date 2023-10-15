@@ -26,7 +26,7 @@ export const getAllBook= async (req,res,next)=>{
 
         let category=req.query.category;
         if(category === undefined || category === 'all' ){
-            category={$in:['Mystery','Fiction','Triller']};
+            category={$in:['Mystery','Fiction','Triller',"Autobiography","History","Biography","Self-help","Horror","Fantasy"]};
         }
         
         const books_Data =await Book.find({
@@ -84,6 +84,28 @@ export const deleteBook= async (req,res,next)=>{
 
         await Book.findByIdAndDelete(req.params.id,req.body,{new:true});
         res.status(200).json("Book is deleted");
+    }
+    catch(error){
+        next(error);
+    }
+    
+};
+
+export const getBook= async (req,res,next)=>{
+    try{
+
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return next(errorhandler(400,'Invalid object id!'));
+        }
+
+
+        const book_Data= await Book.findById(req.params.id);
+
+        if(!book_Data){
+            return next(errorhandler(404,'Book not found!'))
+        }
+
+        res.status(200).json(book_Data);
     }
     catch(error){
         next(error);
