@@ -57,7 +57,7 @@ import EditBooks from "../dashboard/EditBooks";
             {
                 path:'/admin/dashBoard/edit-books/:id',
                 element:<EditBooks/>,
-                loader:({params})=>fetch(`/api/book/admin/dashBoard/edit-books/${params.id}`)
+                loader:({params})=>fetch(`/admin/dashBoard/edit-books/${params.id}`)
             },
         ]
     },

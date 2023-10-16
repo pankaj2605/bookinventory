@@ -26,7 +26,21 @@ export const getAllBook= async (req,res,next)=>{
 
         let category=req.query.category;
         if(category === undefined || category === 'all' ){
-            category={$in:['Mystery','Fiction','Triller',"Autobiography","History","Biography","Self-help","Horror","Fantasy"]};
+            category={$in:['Mystery','Triller',"Biography","Fiction",
+            "Non-Fiction",
+            "Programming",
+            "Science Fiction",
+            "Fantasy",
+            "Horror",
+            "Autobiography",
+            "History",
+            "Self-help",
+            "Memoir",
+            "Business",
+            "Children Books",
+            "Travel",
+            "Religion",
+            "Art and Design"]};
         }
         
         const books_Data =await Book.find({
