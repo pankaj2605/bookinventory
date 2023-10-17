@@ -5,9 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "nodemon mern_server/index.js",
-    "start": "node mern_server/index.js",
-    "build":"npm install --prefix mern_server && npm install --prefix mern-client && npm run build --prefix mern-client"
+    "build":"npm install --prefix mern_server &&  && npm run build --prefix mern_server npm install --prefix mern-client && npm run build --prefix mern-client"
   },
   "author": "",
   "license": "ISC"
