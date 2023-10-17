@@ -4,18 +4,15 @@ import {AuthContext} from "../contexts/AuthProvider";
 import { useNavigate } from 'react-router-dom';
 import googleLogo from "../assets/google-logo.svg";
 
-
-
-export default function Signup() {
-
-    const {createUser,loginWithGoogle}=useContext(AuthContext);
+export default function Login() {
+    const {createUser,loginWithGoogle,login}=useContext(AuthContext);
     const[error,setError]=useState();
     const navigate =useNavigate();
     const location =useLocation();
 
     const from=location.state?.from?.pathname || "/";
 
-    const handleSignUp= async (event)=>{
+    const handleLogin= async (event)=>{
         event.preventDefault();
         const form =event.target;
         const email=form.email.value;
@@ -23,8 +20,9 @@ export default function Signup() {
 
         try{
 
-            const userCredential= await createUser(email,password);
+            const userCredential= await login(email,password);
             const user = userCredential.user;
+            alert("Login successful!!")
             navigate(from,{replace:true});
 
         }catch(error){
@@ -33,6 +31,7 @@ export default function Signup() {
             setError(errorMessage);
         }
     }
+
 
     const handleRegister= async()=>{
         try{
@@ -57,10 +56,10 @@ export default function Signup() {
 		<div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
 			<div className="max-w-md mx-auto">
 				<div>
-					<h1 className="text-2xl font-semibold">Sign Up For Book Listing</h1>
+					<h1 className="text-2xl font-semibold">Sign In For Book Listing</h1>
 				</div>
 				<div className="divide-y divide-gray-200">
-					<form onSubmit={handleSignUp} className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
+					<form onSubmit={handleLogin} className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
 						<div className="relative">
 							<input  id="email" name="email" type="text" className="peer  h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Email address" />
 							
@@ -69,15 +68,15 @@ export default function Signup() {
 							<input  id="password" name="password" type="password" className="peer  h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Password" />
 							
 						</div>
-                        <p>If you have an account .please <Link to="/login" className="text-blue-600 hover:underline">Login</Link> Here.</p>
+                        {
+                            <p className='text-red-800'>{error && "email or password is not correct" }</p>
+                        }
+                        <p>If you  don't have account .please <Link to="/sign-up" className="text-blue-600 hover:underline">Sign Up</Link> Here.</p>
 						<div className="relative">
-							<button type="submit" className="bg-blue-500 text-white rounded-md px-4 py-2">Sign Up</button>
+							<button type="submit" className="bg-blue-500 text-white rounded-md px-4 py-2">Sign In</button>
 						</div>
 					</form>
 				</div>
-                {
-                            <p className='text-red-800'>{error && "email is already in use" }</p>
-                        }
                 <hr/>
                 <div className='flex w-full items-center flex-col mt-5 gap-3'>
                     <button onClick={handleRegister} className='block'><img src={googleLogo} alt="google logo" className='w-12 h-12 inline-block'/>Login with Google</button>

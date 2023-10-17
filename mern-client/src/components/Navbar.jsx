@@ -54,6 +54,7 @@ export default function Navbar() {
             {/* btn for lg devices  */}
             <div className='space-x-12 hidden lg:flex items-center'>
                 <button><FaBarsStaggered className='w-5 hover:underline'/></button>
+
             </div>
                 {/* menu btn for the mobile devices  */}
                 <div className='md:hidden '>
