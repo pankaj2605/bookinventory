@@ -24,4 +24,5 @@ dist-ssr
 *.sw?
 .env
 mern_server/.env
+mern-client/.env
 

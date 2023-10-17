@@ -1,32 +1,31 @@
 import { useLoaderData, useParams } from 'react-router-dom';
 import React, { useState } from 'react';
 import { Label, TextInput,Textarea } from 'flowbite-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function EditBooks() {
-    const bookCategories=[
-        "Fiction",
-        "Non-Fiction",
-        "Mistery",
-        "Programming",
-        "Science Fiction",
-        "Fantasy",
-        "Horror",
-        "Biblography",
-        "Autobiography",
-        "History",
-        "Self-help",
-        "Memoir",
-        "Business",
-        "Children Books",
-        "Travel",
-        "Religion",
-        "Art and Design"
-       ] 
+    const bookCategories=['Mystery','Triller',"Biography","Fiction",
+    "Non-Fiction",
+    "Programming",
+    "Science Fiction",
+    "Fantasy",
+    "Horror",
+    "Autobiography",
+    "History",
+    "Self-help",
+    "Memoir",
+    "Business",
+    "Children Books",
+    "Travel",
+    "Religion",
+    "Art and Design"] 
+
+    const Navigate=useNavigate(); 
     const {id} = useParams();
     const {bookTitle,authorName,imageURL,category,bookDescription,bookPDFURL}= useLoaderData();
     const[selectedBookCategory,setSelectedBookCategory]=useState(category);
   
-    const handleBookSubmit= (event)=>{
+    const handleBookSubmit= async(event)=>{
         event.preventDefault();
         const form=event.target;
 
@@ -40,24 +39,24 @@ export default function EditBooks() {
         const bookObj={bookTitle,authorName,imageURL,category,bookDescription,bookPDFURL};
 
 
-        // try{
+        try{
  
-        //     const res = await fetch('/api/book/update-book',{
-        //         method:'POST',
-        //         headers:{
-        //             'Content-Type':'application/json',
-        //         },
-        //         body:JSON.stringify(
-        //             bookObj
-        //         ),
-        //     });
-        //     const data = await res.json(); 
-        //     alert("Book Uploaded succsfully")
-        //     form.reset();
-        // }catch(error){
-        //     alert(error)
+            const res = await fetch(`/api/book/${id}`,{
+                method:'PATCH',
+                headers:{
+                    'Content-Type':'application/json',
+                },
+                body:JSON.stringify(
+                    bookObj
+                ),
+            });
+            const data = await res.json(); 
+            alert("Book Updated succsfully")
+            Navigate('/admin/dashBoard/manage');
+        }catch(error){
+            alert(error)
 
-        // }
+        }
     }
 
     const handleChangeSelectedValue=(event)=>{

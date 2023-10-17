@@ -2,25 +2,21 @@ import React, { useState } from 'react';
 import { Button, Checkbox, Label, TextInput,Textarea } from 'flowbite-react';
 
 export default function UploadBook() {
-   const bookCategories=[
-    "Fiction",
-    "Non-Fiction",
-    "Mistery",
-    "Programming",
-    "Science Fiction",
-    "Fantasy",
-    "Horror",
-    "Biblography",
-    "Autobiography",
-    "History",
-    "Self-help",
-    "Memoir",
-    "Business",
-    "Children Books",
-    "Travel",
-    "Religion",
-    "Art and Design"
-   ] 
+   const bookCategories=['Mystery','Triller',"Biography","Fiction",
+   "Non-Fiction",
+   "Programming",
+   "Science Fiction",
+   "Fantasy",
+   "Horror",
+   "Autobiography",
+   "History",
+   "Self-help",
+   "Memoir",
+   "Business",
+   "Children Books",
+   "Travel",
+   "Religion",
+   "Art and Design"] 
 
    const[selectedBookCategory,setSelectedBookCategory]=useState(bookCategories[0]);
 
