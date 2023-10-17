@@ -10,6 +10,8 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT||5000
 
+const __dirname=path.resolve();
+
 app.use(express.static(path.join(__dirname,'/mern-client/dist')));
 
 
