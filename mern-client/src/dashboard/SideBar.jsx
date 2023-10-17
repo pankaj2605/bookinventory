@@ -45,22 +45,22 @@ export default function SideBar() {
               Manage Books
             </p>
           </Sidebar.Item>
-          <Sidebar.Item
+          {/* <Sidebar.Item
             href="#"
             icon={HiUser}
           >
             <p>
               Users
             </p>
-          </Sidebar.Item>
-          <Sidebar.Item
+          </Sidebar.Item> */}
+          {/* <Sidebar.Item
             href="#"
             icon={HiShoppingBag}
           >
             <p>
               Products
             </p>
-          </Sidebar.Item>
+          </Sidebar.Item> */}
           <Sidebar.Item
             href="/login"
             icon={HiArrowSmRight}
@@ -79,14 +79,14 @@ export default function SideBar() {
           </Sidebar.Item>
         </Sidebar.ItemGroup>
         <Sidebar.ItemGroup>
-          <Sidebar.Item
+          {/* <Sidebar.Item
             href="#"
             icon={HiChartPie}
           >
             <p>
               Upgrade to Pro
             </p>
-          </Sidebar.Item>
+          </Sidebar.Item> */}
           <Sidebar.Item
             href="#"
             icon={HiViewBoards}
