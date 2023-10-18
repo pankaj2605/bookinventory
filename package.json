@@ -1,13 +1,12 @@
 {
-  "name": "mern_server",
+  "name": "mern_book_project",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "build":"npm install --prefix mern_server &&  && npm run build --prefix mern_server npm install --prefix mern-client && npm run build --prefix mern-client"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build":"npm install --prefix mern_server &&  && npm start --prefix mern_server npm install --prefix mern-client && npm run build --prefix mern-client"
   },
   "author": "",
   "license": "ISC"
-
 }
